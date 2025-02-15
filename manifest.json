@@ -1,0 +1,16 @@
+{
+  "domain": "port_canaveral_ships",
+  "name": "Port Canaveral Ships",
+  "version": "0.1.1",
+  "documentation": "https://github.com/mattbratt/HACS_CCShips",
+  "issue_tracker": "https://github.com/mattbratt/HACS_CCShips/issues",
+  "dependencies": [],
+  "codeowners": ["@mattbratt"],
+  "config_flow": true,
+  "requirements": [
+    "requests>=2.25.1",
+    "beautifulsoup4>=4.9.3"
+  ],
+  "icon": "mdi:ship-wheel",
+  "logo": "/local/port_canaveral_ships/logo.png"
+}
