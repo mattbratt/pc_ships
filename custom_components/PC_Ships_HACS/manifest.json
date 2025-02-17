@@ -2,8 +2,8 @@
   "domain": "port_canaveral_ships",
   "name": "Port Canaveral Ships",
   "version": "0.1.1",
-  "documentation": "https://github.com/mattbratt/HACS_CCShips",
-  "issue_tracker": "https://github.com/mattbratt/HACS_CCShips/issues",
+  "documentation": "https://github.com/mattbratt/PC_Ships_HACS",
+  "issue_tracker": "https://github.com/mattbratt/PC_Ships_HACS/issues",
   "dependencies": [],
   "codeowners": ["@mattbratt"],
   "config_flow": true,
@@ -14,3 +14,11 @@
   "icon": "mdi:ship-wheel",
   "logo": "/local/port_canaveral_ships/logo.png"
 }
+
+
+
+
+
+
+
+
