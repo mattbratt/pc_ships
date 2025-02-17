@@ -1,4 +1,3 @@
-"""Config flow for Port Canaveral Ships integration."""
 import voluptuous as vol
 import logging
 
@@ -8,6 +7,7 @@ import homeassistant.helpers.config_validation as cv
 
 from .const import (
     DOMAIN,
+    # We still import these from const.py as needed:
     CONF_TRACK_STATUSES,
     CONF_UPDATE_INTERVAL_MINUTES,
     CONF_VESSEL_CLASSES,
@@ -42,9 +42,12 @@ class PortCanaveralShipsConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
         self._errors = {}
 
         if user_input is not None:
+            # Create a config entry with minimal or empty data,
+            # putting user-editable settings in 'options'.
             return self.async_create_entry(
                 title="Port Canaveral Ships",
-                data={
+                data={},  # Or store only a unique_id/credentials if relevant
+                options={
                     CONF_VESSEL_CLASSES: user_input.get("Vessel Class", DEFAULT_VESSEL_CLASSES),
                     CONF_TRACK_STATUSES: user_input.get("Status/es to Track", DEFAULT_STATUSES),
                     CONF_UPDATE_INTERVAL_MINUTES: user_input.get("Refresh Interval (minutes)", DEFAULT_UPDATE_INTERVAL),
@@ -102,9 +105,11 @@ class PortCanaveralShipsOptionsFlow(config_entries.OptionsFlow):
         The Options step the user sees when clicking "Configure" on the integration.
         """
         if user_input is not None:
+            # Update the config entry options, ignoring data
             return self.async_create_entry(
                 title="",
-                data={
+                data={},  # data stays empty; we store everything in options
+                options={
                     CONF_VESSEL_CLASSES: user_input.get("Vessel Class"),
                     CONF_TRACK_STATUSES: user_input.get("Status/es to Track"),
                     CONF_UPDATE_INTERVAL_MINUTES: user_input.get("Refresh Interval (minutes)"),
@@ -115,14 +120,14 @@ class PortCanaveralShipsOptionsFlow(config_entries.OptionsFlow):
                 }
             )
 
-        # Get current settings
-        current_vessel_classes = self.config_entry.data.get(CONF_VESSEL_CLASSES, DEFAULT_VESSEL_CLASSES)
-        current_track_statuses = self.config_entry.data.get(CONF_TRACK_STATUSES, DEFAULT_STATUSES)
-        current_update_interval = self.config_entry.data.get(CONF_UPDATE_INTERVAL_MINUTES, DEFAULT_UPDATE_INTERVAL)
-        current_sensor_in_port = self.config_entry.data.get(CONF_SENSOR_COUNT_IN_PORT, DEFAULT_SENSOR_COUNT)
-        current_sensor_confirmed = self.config_entry.data.get(CONF_SENSOR_COUNT_CONFIRMED, DEFAULT_SENSOR_COUNT)
-        current_sensor_scheduled = self.config_entry.data.get(CONF_SENSOR_COUNT_SCHEDULED, DEFAULT_SENSOR_COUNT)
-        current_sensor_departed = self.config_entry.data.get(CONF_SENSOR_COUNT_DEPARTED, DEFAULT_SENSOR_COUNT)
+        # Grab current settings from entry.options (or fallback to defaults)
+        current_vessel_classes = self.config_entry.options.get(CONF_VESSEL_CLASSES, DEFAULT_VESSEL_CLASSES)
+        current_track_statuses = self.config_entry.options.get(CONF_TRACK_STATUSES, DEFAULT_STATUSES)
+        current_update_interval = self.config_entry.options.get(CONF_UPDATE_INTERVAL_MINUTES, DEFAULT_UPDATE_INTERVAL)
+        current_sensor_in_port = self.config_entry.options.get(CONF_SENSOR_COUNT_IN_PORT, DEFAULT_SENSOR_COUNT)
+        current_sensor_confirmed = self.config_entry.options.get(CONF_SENSOR_COUNT_CONFIRMED, DEFAULT_SENSOR_COUNT)
+        current_sensor_scheduled = self.config_entry.options.get(CONF_SENSOR_COUNT_SCHEDULED, DEFAULT_SENSOR_COUNT)
+        current_sensor_departed = self.config_entry.options.get(CONF_SENSOR_COUNT_DEPARTED, DEFAULT_SENSOR_COUNT)
 
         data_schema = vol.Schema({
             vol.Optional("Vessel Class", default=current_vessel_classes): cv.multi_select(VALID_VESSEL_CLASSES),

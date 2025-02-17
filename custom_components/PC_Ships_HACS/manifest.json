@@ -6,13 +6,14 @@
   "issue_tracker": "https://github.com/mattbratt/PC_Ships_HACS/issues",
   "dependencies": [],
   "codeowners": ["@mattbratt"],
+  "iot_class": "cloud_polling",
   "config_flow": true,
   "requirements": [
     "requests>=2.25.1",
     "beautifulsoup4>=4.9.3"
   ],
   "icon": "mdi:ship-wheel",
-  "logo": "/local/port_canaveral_ships/logo.png"
+  "logo": "dark_icon.png"
 }
 
 

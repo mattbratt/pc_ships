@@ -16,6 +16,8 @@ from .const import (
     CONF_SENSOR_COUNT_DEPARTED,
     DEFAULT_SENSOR_COUNT,
 )
+from . import coordinator as coord_module  # or import the function(s) you need
+# e.g. from .coordinator import parse_date_time_to_epoch
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -39,26 +41,30 @@ def get_sorted_ships_for_status(ships, status):
         # Order by arrival time (earliest first)
         return sorted(
             ships,
-            key=lambda ship: ship.get("arrival_epoch") if ship.get("arrival_epoch") is not None else float("inf")
+            key=lambda ship: ship.get("arrival_epoch")
+            if ship.get("arrival_epoch") is not None else float("inf")
         )
     elif status == "In Port":
-        # Order by departure time ascending (first ship to depart is first)
+        # Order by departure time ascending (first to depart is first)
         return sorted(
             ships,
-            key=lambda ship: ship.get("departure_epoch") if ship.get("departure_epoch") is not None else float("inf")
+            key=lambda ship: ship.get("departure_epoch")
+            if ship.get("departure_epoch") is not None else float("inf")
         )
     elif status == "Departed":
-        # Order by departure time descending (most recent departure first)
+        # Order by departure time descending (most recent first)
         return sorted(
             ships,
-            key=lambda ship: ship.get("departure_epoch") if ship.get("departure_epoch") is not None else float("-inf"),
+            key=lambda ship: ship.get("departure_epoch")
+            if ship.get("departure_epoch") is not None else float("-inf"),
             reverse=True
         )
     else:
-        # Fallback: order by arrival time ascending
+        # Fallback: arrival time ascending
         return sorted(
             ships,
-            key=lambda ship: ship.get("arrival_epoch") if ship.get("arrival_epoch") is not None else float("inf")
+            key=lambda ship: ship.get("arrival_epoch")
+            if ship.get("arrival_epoch") is not None else float("inf")
         )
 
 
@@ -71,20 +77,22 @@ async def async_setup_entry(
     Set up sensor entities based on a config entry.
     """
     coordinator = hass.data[DOMAIN][entry.entry_id]
+
     sensors = []
 
-    # Get the statuses to track from config
-    tracked_statuses = entry.data.get(CONF_TRACK_STATUSES, [])
-    # For each tracked status, get the number of sensors configured
+    # Because track_statuses is now in options, we read from entry.options:
+    tracked_statuses = entry.options.get(CONF_TRACK_STATUSES, [])
+
+    # For each tracked status, get the number of sensors configured (also in options)
     for status in tracked_statuses:
         if status == "In Port":
-            count = entry.data.get(CONF_SENSOR_COUNT_IN_PORT, DEFAULT_SENSOR_COUNT)
+            count = entry.options.get(CONF_SENSOR_COUNT_IN_PORT, DEFAULT_SENSOR_COUNT)
         elif status == "Confirmed":
-            count = entry.data.get(CONF_SENSOR_COUNT_CONFIRMED, DEFAULT_SENSOR_COUNT)
+            count = entry.options.get(CONF_SENSOR_COUNT_CONFIRMED, DEFAULT_SENSOR_COUNT)
         elif status == "Scheduled":
-            count = entry.data.get(CONF_SENSOR_COUNT_SCHEDULED, DEFAULT_SENSOR_COUNT)
+            count = entry.options.get(CONF_SENSOR_COUNT_SCHEDULED, DEFAULT_SENSOR_COUNT)
         elif status == "Departed":
-            count = entry.data.get(CONF_SENSOR_COUNT_DEPARTED, DEFAULT_SENSOR_COUNT)
+            count = entry.options.get(CONF_SENSOR_COUNT_DEPARTED, DEFAULT_SENSOR_COUNT)
         else:
             count = 0
 
@@ -143,7 +151,11 @@ class PortCanaveralShipSensor(CoordinatorEntity, SensorEntity):
     def extra_state_attributes(self):
         """Return additional attributes with details about the ship assigned to this sensor slot."""
         ship = self._get_ship_for_slot()
-        attributes = {"status_type": self.status_type, "sensor_slot": self.slot, "last_updated": datetime.now().isoformat()}
+        attributes = {
+            "status_type": self.status_type,
+            "sensor_slot": self.slot,
+            "last_updated": datetime.now().isoformat(),
+        }
         if ship:
             arrival_date, arrival_time = format_epoch_as_date_time(ship.get("arrival_epoch"))
             departure_date, departure_time = format_epoch_as_date_time(ship.get("departure_epoch"))
