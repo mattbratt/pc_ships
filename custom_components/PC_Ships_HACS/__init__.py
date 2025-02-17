@@ -10,6 +10,9 @@ from .const import (
     CONF_TRACK_STATUSES,
     CONF_UPDATE_INTERVAL_MINUTES,
     CONF_VESSEL_CLASSES,
+    DEFAULT_STATUSES,
+    DEFAULT_UPDATE_INTERVAL,
+    DEFAULT_VESSEL_CLASSES,
 )
 from .coordinator import PortCanaveralShipsCoordinator
 
@@ -21,10 +24,10 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     Set up Port Canaveral Ships from a config entry (UI-based).
     This is called when the user adds or updates the integration in the UI.
     """
-    # Extract config/option data from the config entry
-    track_statuses = entry.data.get(CONF_TRACK_STATUSES)
-    update_interval_minutes = entry.data.get(CONF_UPDATE_INTERVAL_MINUTES)
-    vessel_classes = entry.data.get(CONF_VESSEL_CLASSES)
+    # For user-editable settings, read from entry.options, fallback to defaults
+    track_statuses = entry.options.get(CONF_TRACK_STATUSES, DEFAULT_STATUSES)
+    update_interval_minutes = entry.options.get(CONF_UPDATE_INTERVAL_MINUTES, DEFAULT_UPDATE_INTERVAL)
+    vessel_classes = entry.options.get(CONF_VESSEL_CLASSES, DEFAULT_VESSEL_CLASSES)
 
     # Create the coordinator (polling logic)
     coordinator = PortCanaveralShipsCoordinator(
@@ -45,3 +48,11 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     await hass.config_entries.async_forward_entry_setups(entry, ["sensor"])
 
     return True
+
+
+async def async_unload_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
+    """Unload a config entry."""
+    unload_ok = await hass.config_entries.async_unload_platforms(entry, ["sensor"])
+    if unload_ok:
+        hass.data[DOMAIN].pop(entry.entry_id)
+    return unload_ok
