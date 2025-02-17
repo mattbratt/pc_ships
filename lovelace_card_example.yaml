@@ -1,0 +1,406 @@
+type: vertical-stack
+title: Port Canaveral Ships Dashboard
+cards:
+  ######################################################
+  #                     IN PORT SHIPS                  #
+  #           Sorted by departing first (in your code) #
+  ######################################################
+  - type: vertical-stack
+    title: "In Port Ships"
+    cards:
+      - type: conditional
+        conditions:
+          - entity: sensor.port_canaveral_ships_in_port_1
+            state_not: "No Data"
+        card:
+          type: entities
+          title: "In Port Ship #1"
+          entities:
+            - entity: sensor.port_canaveral_ships_in_port_1
+              name: "Ship Name"
+            - type: attribute
+              entity: sensor.port_canaveral_ships_in_port_1
+              attribute: cargo_type
+              name: "Cargo Type"
+            - type: attribute
+              entity: sensor.port_canaveral_ships_in_port_1
+              attribute: arrival_date
+              name: "Arrival Date"
+            - type: attribute
+              entity: sensor.port_canaveral_ships_in_port_1
+              attribute: arrival_time
+              name: "Arrival Time"
+            - type: attribute
+              entity: sensor.port_canaveral_ships_in_port_1
+              attribute: departure_date
+              name: "Departure Date"
+            - type: attribute
+              entity: sensor.port_canaveral_ships_in_port_1
+              attribute: departure_time
+              name: "Departure Time"
+
+      - type: conditional
+        conditions:
+          - entity: sensor.port_canaveral_ships_in_port_2
+            state_not: "No Data"
+        card:
+          type: entities
+          title: "In Port Ship #2"
+          entities:
+            - entity: sensor.port_canaveral_ships_in_port_2
+              name: "Ship Name"
+            - type: attribute
+              entity: sensor.port_canaveral_ships_in_port_2
+              attribute: cargo_type
+              name: "Cargo Type"
+            - type: attribute
+              entity: sensor.port_canaveral_ships_in_port_2
+              attribute: arrival_date
+              name: "Arrival Date"
+            - type: attribute
+              entity: sensor.port_canaveral_ships_in_port_2
+              attribute: arrival_time
+              name: "Arrival Time"
+            - type: attribute
+              entity: sensor.port_canaveral_ships_in_port_2
+              attribute: departure_date
+              name: "Departure Date"
+            - type: attribute
+              entity: sensor.port_canaveral_ships_in_port_2
+              attribute: departure_time
+              name: "Departure Time"
+
+      - type: conditional
+        conditions:
+          - entity: sensor.port_canaveral_ships_in_port_3
+            state_not: "No Data"
+        card:
+          type: entities
+          title: "In Port Ship #3"
+          entities:
+            - entity: sensor.port_canaveral_ships_in_port_3
+              name: "Ship Name"
+            - type: attribute
+              entity: sensor.port_canaveral_ships_in_port_3
+              attribute: cargo_type
+              name: "Cargo Type"
+            - type: attribute
+              entity: sensor.port_canaveral_ships_in_port_3
+              attribute: arrival_date
+              name: "Arrival Date"
+            - type: attribute
+              entity: sensor.port_canaveral_ships_in_port_3
+              attribute: arrival_time
+              name: "Arrival Time"
+            - type: attribute
+              entity: sensor.port_canaveral_ships_in_port_3
+              attribute: departure_date
+              name: "Departure Date"
+            - type: attribute
+              entity: sensor.port_canaveral_ships_in_port_3
+              attribute: departure_time
+              name: "Departure Time"
+
+      - type: conditional
+        conditions:
+          - entity: sensor.port_canaveral_ships_in_port_4
+            state_not: "No Data"
+        card:
+          type: entities
+          title: "In Port Ship #4"
+          entities:
+            - entity: sensor.port_canaveral_ships_in_port_4
+              name: "Ship Name"
+            - type: attribute
+              entity: sensor.port_canaveral_ships_in_port_4
+              attribute: cargo_type
+              name: "Cargo Type"
+            - type: attribute
+              entity: sensor.port_canaveral_ships_in_port_4
+              attribute: arrival_date
+              name: "Arrival Date"
+            - type: attribute
+              entity: sensor.port_canaveral_ships_in_port_4
+              attribute: arrival_time
+              name: "Arrival Time"
+            - type: attribute
+              entity: sensor.port_canaveral_ships_in_port_4
+              attribute: departure_date
+              name: "Departure Date"
+            - type: attribute
+              entity: sensor.port_canaveral_ships_in_port_4
+              attribute: departure_time
+              name: "Departure Time"
+
+      - type: conditional
+        conditions:
+          - entity: sensor.port_canaveral_ships_in_port_5
+            state_not: "No Data"
+        card:
+          type: entities
+          title: "In Port Ship #5"
+          entities:
+            - entity: sensor.port_canaveral_ships_in_port_5
+              name: "Ship Name"
+            - type: attribute
+              entity: sensor.port_canaveral_ships_in_port_5
+              attribute: cargo_type
+              name: "Cargo Type"
+            - type: attribute
+              entity: sensor.port_canaveral_ships_in_port_5
+              attribute: arrival_date
+              name: "Arrival Date"
+            - type: attribute
+              entity: sensor.port_canaveral_ships_in_port_5
+              attribute: arrival_time
+              name: "Arrival Time"
+            - type: attribute
+              entity: sensor.port_canaveral_ships_in_port_5
+              attribute: departure_date
+              name: "Departure Date"
+            - type: attribute
+              entity: sensor.port_canaveral_ships_in_port_5
+              attribute: departure_time
+              name: "Departure Time"
+
+  ######################################################
+  #                   DEPARTED SHIPS                   #
+  #    Sorted by most recently departed (in your code) #
+  ######################################################
+  - type: vertical-stack
+    title: "Departed Ships"
+    cards:
+      - type: conditional
+        conditions:
+          - entity: sensor.port_canaveral_ships_departed_1
+            state_not: "No Data"
+        card:
+          type: entities
+          title: "Departed Ship #1"
+          entities:
+            - entity: sensor.port_canaveral_ships_departed_1
+              name: "Ship Name"
+            - type: attribute
+              entity: sensor.port_canaveral_ships_departed_1
+              attribute: cargo_type
+              name: "Cargo Type"
+            - type: attribute
+              entity: sensor.port_canaveral_ships_departed_1
+              attribute: arrival_date
+              name: "Arrival Date"
+            - type: attribute
+              entity: sensor.port_canaveral_ships_departed_1
+              attribute: arrival_time
+              name: "Arrival Time"
+            - type: attribute
+              entity: sensor.port_canaveral_ships_departed_1
+              attribute: departure_date
+              name: "Departure Date"
+            - type: attribute
+              entity: sensor.port_canaveral_ships_departed_1
+              attribute: departure_time
+              name: "Departure Time"
+
+      - type: conditional
+        conditions:
+          - entity: sensor.port_canaveral_ships_departed_2
+            state_not: "No Data"
+        card:
+          type: entities
+          title: "Departed Ship #2"
+          entities:
+            - entity: sensor.port_canaveral_ships_departed_2
+              name: "Ship Name"
+            - type: attribute
+              entity: sensor.port_canaveral_ships_departed_2
+              attribute: cargo_type
+              name: "Cargo Type"
+            - type: attribute
+              entity: sensor.port_canaveral_ships_departed_2
+              attribute: arrival_date
+              name: "Arrival Date"
+            - type: attribute
+              entity: sensor.port_canaveral_ships_departed_2
+              attribute: arrival_time
+              name: "Arrival Time"
+            - type: attribute
+              entity: sensor.port_canaveral_ships_departed_2
+              attribute: departure_date
+              name: "Departure Date"
+            - type: attribute
+              entity: sensor.port_canaveral_ships_departed_2
+              attribute: departure_time
+              name: "Departure Time"
+
+      - type: conditional
+        conditions:
+          - entity: sensor.port_canaveral_ships_departed_3
+            state_not: "No Data"
+        card:
+          type: entities
+          title: "Departed Ship #3"
+          entities:
+            - entity: sensor.port_canaveral_ships_departed_3
+              name: "Ship Name"
+            - type: attribute
+              entity: sensor.port_canaveral_ships_departed_3
+              attribute: cargo_type
+              name: "Cargo Type"
+            - type: attribute
+              entity: sensor.port_canaveral_ships_departed_3
+              attribute: arrival_date
+              name: "Arrival Date"
+            - type: attribute
+              entity: sensor.port_canaveral_ships_departed_3
+              attribute: arrival_time
+              name: "Arrival Time"
+            - type: attribute
+              entity: sensor.port_canaveral_ships_departed_3
+              attribute: departure_date
+              name: "Departure Date"
+            - type: attribute
+              entity: sensor.port_canaveral_ships_departed_3
+              attribute: departure_time
+              name: "Departure Time"
+
+      - type: conditional
+        conditions:
+          - entity: sensor.port_canaveral_ships_departed_4
+            state_not: "No Data"
+        card:
+          type: entities
+          title: "Departed Ship #4"
+          entities:
+            - entity: sensor.port_canaveral_ships_departed_4
+              name: "Ship Name"
+            - type: attribute
+              entity: sensor.port_canaveral_ships_departed_4
+              attribute: cargo_type
+              name: "Cargo Type"
+            - type: attribute
+              entity: sensor.port_canaveral_ships_departed_4
+              attribute: arrival_date
+              name: "Arrival Date"
+            - type: attribute
+              entity: sensor.port_canaveral_ships_departed_4
+              attribute: arrival_time
+              name: "Arrival Time"
+            - type: attribute
+              entity: sensor.port_canaveral_ships_departed_4
+              attribute: departure_date
+              name: "Departure Date"
+            - type: attribute
+              entity: sensor.port_canaveral_ships_departed_4
+              attribute: departure_time
+              name: "Departure Time"
+
+      - type: conditional
+        conditions:
+          - entity: sensor.port_canaveral_ships_departed_5
+            state_not: "No Data"
+        card:
+          type: entities
+          title: "Departed Ship #5"
+          entities:
+            - entity: sensor.port_canaveral_ships_departed_5
+              name: "Ship Name"
+            - type: attribute
+              entity: sensor.port_canaveral_ships_departed_5
+              attribute: cargo_type
+              name: "Cargo Type"
+            - type: attribute
+              entity: sensor.port_canaveral_ships_departed_5
+              attribute: arrival_date
+              name: "Arrival Date"
+            - type: attribute
+              entity: sensor.port_canaveral_ships_departed_5
+              attribute: arrival_time
+              name: "Arrival Time"
+            - type: attribute
+              entity: sensor.port_canaveral_ships_departed_5
+              attribute: departure_date
+              name: "Departure Date"
+            - type: attribute
+              entity: sensor.port_canaveral_ships_departed_5
+              attribute: departure_time
+              name: "Departure Time"
+
+  ######################################################
+  #                 CONFIRMED SHIPS                    #
+  #       Sorted by arriving first (in your code)      #
+  ######################################################
+  - type: vertical-stack
+    title: "Confirmed Ships"
+    cards:
+      - type: conditional
+        conditions:
+          - entity: sensor.port_canaveral_ships_confirmed_1
+            state_not: "No Data"
+        card:
+          type: entities
+          title: "Confirmed Ship #1"
+          entities:
+            - entity: sensor.port_canaveral_ships_confirmed_1
+              name: "Ship Name"
+            - type: attribute
+              entity: sensor.port_canaveral_ships_confirmed_1
+              attribute: cargo_type
+              name: "Cargo Type"
+            - type: attribute
+              entity: sensor.port_canaveral_ships_confirmed_1
+              attribute: arrival_date
+              name: "Arrival Date"
+            - type: attribute
+              entity: sensor.port_canaveral_ships_confirmed_1
+              attribute: arrival_time
+              name: "Arrival Time"
+            - type: attribute
+              entity: sensor.port_canaveral_ships_confirmed_1
+              attribute: departure_date
+              name: "Departure Date"
+            - type: attribute
+              entity: sensor.port_canaveral_ships_confirmed_1
+              attribute: departure_time
+              name: "Departure Time"
+
+      # Repeat for Confirmed Ship #2, #3, #4, #5 as above
+
+  ######################################################
+  #                 SCHEDULED SHIPS                    #
+  #       Sorted by arriving first (in your code)      #
+  ######################################################
+  - type: vertical-stack
+    title: "Scheduled Ships"
+    cards:
+      - type: conditional
+        conditions:
+          - entity: sensor.port_canaveral_ships_scheduled_1
+            state_not: "No Data"
+        card:
+          type: entities
+          title: "Scheduled Ship #1"
+          entities:
+            - entity: sensor.port_canaveral_ships_scheduled_1
+              name: "Ship Name"
+            - type: attribute
+              entity: sensor.port_canaveral_ships_scheduled_1
+              attribute: cargo_type
+              name: "Cargo Type"
+            - type: attribute
+              entity: sensor.port_canaveral_ships_scheduled_1
+              attribute: arrival_date
+              name: "Arrival Date"
+            - type: attribute
+              entity: sensor.port_canaveral_ships_scheduled_1
+              attribute: arrival_time
+              name: "Arrival Time"
+            - type: attribute
+              entity: sensor.port_canaveral_ships_scheduled_1
+              attribute: departure_date
+              name: "Departure Date"
+            - type: attribute
+              entity: sensor.port_canaveral_ships_scheduled_1
+              attribute: departure_time
+              name: "Departure Time"
+
+      # Repeat for Scheduled Ship #2, #3, #4, #5 as above
