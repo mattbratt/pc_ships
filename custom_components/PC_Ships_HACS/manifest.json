@@ -2,21 +2,17 @@
   "domain": "PC_Ships_HACS",
   "name": "Port Canaveral Ships",
   "version": "0.1.1",
-  "documentation": "https://github.com/mattbratt/PC_Ships_HACS",
-  "issue_tracker": "https://github.com/mattbratt/PC_Ships_HACS/issues",
-  "dependencies": [],
   "codeowners": ["@mattbratt"],
-  "iot_class": "cloud_polling",
   "config_flow": true,
+  "dependencies": [],
+  "documentation": "https://github.com/mattbratt/PC_Ships_HACS",
+  "iot_class": "cloud_polling",
+  "issue_tracker": "https://github.com/mattbratt/PC_Ships_HACS/issues",
   "requirements": [
     "requests>=2.25.1",
     "beautifulsoup4>=4.9.3"
   ]
 }
-
-
-
-
 
 
 
