@@ -5,9 +5,9 @@
   "codeowners": ["@mattbratt"],
   "config_flow": true,
   "dependencies": [],
-  "documentation": "https://github.com/mattbratt/PC_Ships_HACS",
+  "documentation": "https://github.com/mattbratt/pc_ships_hacs",
   "iot_class": "cloud_polling",
-  "issue_tracker": "https://github.com/mattbratt/PC_Ships_HACS/issues",
+  "issue_tracker": "https://github.com/mattbratt/pc_ships_hacs/issues",
   "requirements": [
     "requests>=2.25.1",
     "beautifulsoup4>=4.9.3"
