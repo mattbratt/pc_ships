@@ -35,7 +35,7 @@
 <li>sensor.port_canaveral_ships_in_port_1
 <li>sensor.port_canaveral_ships_in_port_2
 <li>sensor.port_canaveral_ships_confirmed_1
-<li>>sensor.port_canaveral_ships_confirmed_2
+<li>sensor.port_canaveral_ships_confirmed_2
 
 
 <h2>About the update interval</h2>
