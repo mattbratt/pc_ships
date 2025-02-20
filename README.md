@@ -7,15 +7,8 @@
 <li>Restart Home Assistant</li>
 
 <h2>Installing Solution</h2>
-<h3>Manual</h3>
 
-<li>Download all the items in /custom_components/pc_ships_hacs and put them on your Home Assistant instance in /custom_components/pc_ships_hacs</li>
-<li>From Home Assistant, go to Settings, Devices & services</li>
-<li>Look for the blue "Add Integration" button and click it</li>
-<li>In search brand, type in "Ships" and locate <b>Port Canaveral Ships</b></li>
-<li>Answer questions about which Statuses to track, retrieval intervals, and number of ships to track for each status (In Port, Departed, Confirmed, Scheduled)
-
-<h3>HACS</h3>
+<h3>HACS (Preferred and easy)</h3>
 
 <li>From Home Assistant, go to HACS.</li>
 <li>From the HACS community store, use the search bar and use "Port Canaveral Ships" in the search. The solution will show in the "Available for download" or "New" section.</li>
@@ -25,6 +18,16 @@
 <li>Look for the blue "Add Integration" button and click it</li>
 <li>In search brand, type in "Ships" and locate Port Canaveral Ships</li>
 <li>Answer questions about which Statuses to track, retrieval intervals, and number of ships to track for each status (In Port, Departed, Confirmed, Scheduled)</li>
+
+<h3>Manual</h3>
+
+<li>Download all the items in /custom_components/pc_ships_hacs and put them on your Home Assistant instance in /custom_components/pc_ships_hacs</li>
+<li>From Home Assistant, go to Settings, Devices & services</li>
+<li>Look for the blue "Add Integration" button and click it</li>
+<li>In search brand, type in "Ships" and locate <b>Port Canaveral Ships</b></li>
+<li>Answer questions about which Statuses to track, retrieval intervals, and number of ships to track for each status (In Port, Departed, Confirmed, Scheduled)
+
+
 
 
 
