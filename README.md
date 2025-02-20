@@ -1,6 +1,18 @@
 
 <h1>Port Canaveral Ships</h1>
 
+<h2>About</h2>
+<p>Port Canaveral Ships is a HACS solution that pulls data from the Port of Canveral and supplies this data to Home Assistant. It can provide a helpful method to keep track of cargo ships in/out of the Port Canaveral, located on the centra east coast of Florida. Depending on the options selected, the user can track just cargo or passenger ships, or both. </p>
+
+When installing, the user is presented with the options below:<br>
+
+It is recommended to leave most of the options as-is, but the most popular ovveride would be to select all of the status/es, instead of just "In Port" and "Confirmed". The status are defined by the following:
+
+<li>In Port - Ships that are in port and at a berth.
+<li>Confirmed - Ships that have validated their arrival to the port.
+<li>Scheduled - Ships that are known to be scheduled to the port - used for mananaging/scheduling berthing, etc. 
+<li>Departed - Ships that have departed.  
+
 <h2>Installing Solution</h2>
 
 <h3>HACS (Preferred and easy)</h3>
