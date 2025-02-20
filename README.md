@@ -1,8 +1,8 @@
 
 <h1>Port Canaveral Ships</h1>
 <h2>Creating port_canaveral_ships and moving files</h2>
-<li>Locate the custom_components directory (folder) and create a new folder called port_canaveral_ships.</li>
-<li>Download all the files from the custom_components/port_canaveral_ships/ directory (folder) in this repository.</li>
+<li>Locate the custom_components directory (folder) and create a new folder called pc_ships.</li>
+<li>Download all the files from the custom_components/pc_ships/ directory (folder) in this repository.</li>
 <li>Place the files you downloaded in the new directory (folder) you created in Home Assistant</li>
 <li>Restart Home Assistant</li>
 
@@ -26,10 +26,6 @@
 <li>Look for the blue "Add Integration" button and click it</li>
 <li>In search brand, type in "Ships" and locate <b>Port Canaveral Ships</b></li>
 <li>Answer questions about which Statuses to track, retrieval intervals, and number of ships to track for each status (In Port, Departed, Confirmed, Scheduled)
-
-
-
-
 
 <h2>Entities Created</h2>
 <p>Depending on what status/es you selected (In Port, Confirmed, Scheduled, Departed), as well as number of sensors for each class, will determine how many entities and naming. </p>
@@ -59,13 +55,6 @@
 <li>Daparture Time: (Format: 03:00 24 hour time)
 <li>Is tug boat: (Checks if Vessel name starts with TG=true or not start with TG=false)
 <li>Others: Last Changed and Last Updated</li>
-
-
-
-
-
-
-
 
 
 <h2>About the update interval</h2>
