@@ -1,10 +1,5 @@
 
 <h1>Port Canaveral Ships</h1>
-<h2>Creating port_canaveral_ships and moving files</h2>
-<li>Locate the custom_components directory (folder) and create a new folder called pc_ships.</li>
-<li>Download all the files from the custom_components/pc_ships/ directory (folder) in this repository.</li>
-<li>Place the files you downloaded in the new directory (folder) you created in Home Assistant</li>
-<li>Restart Home Assistant</li>
 
 <h2>Installing Solution</h2>
 
@@ -21,7 +16,7 @@
 
 <h3>Manual</h3>
 
-<li>Download all the items in /custom_components/pc_ships_hacs and put them on your Home Assistant instance in /custom_components/pc_ships_hacs</li>
+<li>Download all the items in /custom_components/pc_ships and put them on your Home Assistant instance in /custom_components/pc_ships</li>
 <li>From Home Assistant, go to Settings, Devices & services</li>
 <li>Look for the blue "Add Integration" button and click it</li>
 <li>In search brand, type in "Ships" and locate <b>Port Canaveral Ships</b></li>
