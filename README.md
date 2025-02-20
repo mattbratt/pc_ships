@@ -20,7 +20,7 @@
 <li>From Home Assistant, go to Settings, Devices & services</li>
 <li>Look for the blue "Add Integration" button and click it</li>
 <li>In search brand, type in "Ships" and locate <b>Port Canaveral Ships</b></li>
-<li>Answer questions about which Statuses to track, retrieval intervals, and number of ships to track for each status (In Port, Departed, Confirmed, Scheduled)
+<li>Answer questions about which Statuses to track, retrieval intervals, and number of ships to track for each status (In Port, Departed, Confirmed, Scheduled). Recommended: In Port: 15, Confirmed: 15, Scheduled: 15, Departed: 15)
 
 <h2>Entities Created</h2>
 <p>Depending on what status/es you selected (In Port, Confirmed, Scheduled, Departed), as well as number of sensors for each class, will determine how many entities and naming. </p>
