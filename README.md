@@ -28,7 +28,7 @@
     <li>Configure the integration by selecting statuses to track, retrieval intervals, and the number of ships to monitor for each status (In Port, Departed, Confirmed, Scheduled).</li>
 </ol>
 
-<img src="https://github.com/mattbratt/pc_ships/images/pc_ships_config.png">
+<img src="https://github.com/mattbratt/pc_ships/blob/main/images/pc_ships_config.png">
 
 
 
