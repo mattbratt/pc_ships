@@ -1,5 +1,5 @@
 <!-- Icon at the top -->
-<img src="https://hacs.xyz/img/pc_ships/icon.png" alt="Port Canaveral Ships Icon" style="max-width: 100px; display: block; margin: 0 auto;">
+<img src="https://github.com/mattbratt/pc_ships/blob/main/images/icon.png" alt="Port Canaveral Ships Icon" style="max-width: 100px; display: block; margin: 0 auto;">
 
 <h1>Port Canaveral Ships</h1>
 
