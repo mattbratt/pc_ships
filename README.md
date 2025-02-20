@@ -21,12 +21,22 @@
 <li>From the HACS community store, use the search bar and use "Port Canaveral Ships" in the search. The solution will show in the "Available for download" or "New" section.</li>
 <li>Click on Download</li>
 
-
-
 <li>From Home Assistant, go to Settings, Devices & services</li>
 <li>Look for the blue "Add Integration" button and click it</li>
 <li>In search brand, type in "Ships" and locate Port Canaveral Ships</li>
 <li>Answer questions about which Statuses to track, retrieval intervals, and number of ships to track for each status (In Port, Departed, Confirmed, Scheduled)</li>
+
+
+
+<h2>Entities Created</h2>
+<p>Depending on what status/es you selected (In Port, Confirmed, Scheduled, Departed), as well as number of sensors for each class, will determine how many entities and naming. </p>
+<p>For example, if you chose just "In Port" and "Confirmed", with number of sensors for each Status to track at 2, then you will end up with these entities:</p>
+
+<li>sensor.port_canaveral_ships_in_port_1
+<li>sensor.port_canaveral_ships_in_port_2
+<li>sensor.port_canaveral_ships_confirmed_1
+<li>>sensor.port_canaveral_ships_confirmed_2
+
 
 <h2>About the update interval</h2>
 We recommend that you use the default of 20 minutes. The mininum is 15 minutes, and the solution will not allow anything less than this to avoid any issue wtih uncessary retrievals. 
