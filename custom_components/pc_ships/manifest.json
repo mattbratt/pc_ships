@@ -1,5 +1,5 @@
 {
-  "domain": "pc_ships_hacs",
+  "domain": "pc_ships",
   "name": "Port Canaveral Ships",
   "codeowners": ["@mattbratt"],
   "config_flow": true,
