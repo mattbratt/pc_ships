@@ -1,9 +1,7 @@
 <!-- Icon at the top -->
 <div align="center">
-  <img src="https://github.com/mattbratt/pc_ships/blob/main/images/icon.png" alt="Port Canaveral Ships Icon" width="100">
+  <img src="https://github.com/mattbratt/pc_ships/blob/main/images/icon.png" alt="Port Canaveral Ships Icon" width="100"><h1>Port Canaveral Ships</h1>
 </div>
-
-# Port Canaveral Ships
 
 ![GitHub release (latest by date)](https://img.shields.io/github/v/release/mattbratt/pc_ships?style=flat-square)
 ![HACS Compatible](https://img.shields.io/badge/HACS-Compatible-brightgreen?style=flat-square)
@@ -13,7 +11,9 @@
 
 ## About
 
-**Port Canaveral Ships** is a custom integration for [Home Assistant](https://www.home-assistant.io/) available via [HACS](https://hacs.xyz/). It fetches real-time data from Port Canaveral, located on Florida's central east coast, and brings ship tracking into your smart home setup. Monitor cargo ships, passenger ships, or both—tailored to your preferences.
+**Port Canaveral Ships** is a custom integration for [Home Assistant](https://www.home-assistant.io/), available via [HACS](https://hacs.xyz/). It fetches real-time data from Port Canaveral, Florida—one of the busiest cruise ship ports in the world.
+
+Using this solution will bring ship port status into your smart home setup. You can monitor cargo ships, passenger ships, or both—tailored to your preferences.
 
 ### Configuration Options
 During setup, customize your tracking with these options:
@@ -22,7 +22,7 @@ During setup, customize your tracking with these options:
   <img src="https://github.com/mattbratt/pc_ships/blob/main/images/pc_ships_config.png" alt="Config Screenshot" width="400">
 </div>
 
-Stick with the defaults for simplicity, or tweak them—like selecting all statuses instead of just "In Port" and "Confirmed." Here's what the statuses mean:
+Stick with the defaults for simplicity, or customize them—such as selecting all statuses instead of just "In Port" and "Confirmed." Here’s what each status means:
 
 - **In Port**: Ships currently docked at a berth.
 - **Confirmed**: Ships with validated arrivals.
@@ -37,7 +37,7 @@ Stick with the defaults for simplicity, or tweak them—like selecting all statu
 The easiest way to get started:
 
 1. Open **HACS** in Home Assistant.
-2. Search for *"Port Canaveral Ships"* in the store (check "Available for download" or "New").
+2. Search for *"Port Canaveral Ships"* in the Integrations section (check "Available for download" or "New").
 3. Click **Download**.
 4. Navigate to **Settings > Devices & Services** in Home Assistant.
 5. Click the blue **+ Add Integration** button.
@@ -74,7 +74,7 @@ Each sensor comes packed with details:
 |--------------------|--------------------------------------|--------------------------|
 | **Status Type**    | Ship’s status category              | In Port, Confirmed, etc. |
 | **Sensor Slot**    | Sensor number                       | 1, 2, etc.              |
-| **Last Updated**   | Timestamp of last update            | Feb 20, 2025, 10:07 AM  |
+| **Last Updated**   | Timestamp of last update            | Feb 22, 2025, 10:07 AM  |
 | **Vessel**         | Ship name                           | Icon of the Seas        |
 | **Status**         | Matches Status Type                 | In Port                 |
 | **Cargo Type**     | Cargo onboard                       | Containers              |
@@ -99,6 +99,5 @@ For a slick UI, check out `lovelace_card_example.yaml` for a sample Lovelace car
 ---
 
 <div align="center">
-  <strong>Happy ship tracking!</strong><br>
-  Built with 🚢 by MattBratt
+  <strong>Happy sailing!</strong>
 </div>
