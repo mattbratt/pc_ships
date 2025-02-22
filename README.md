@@ -1,80 +1,104 @@
 <!-- Icon at the top -->
-<img src="https://github.com/mattbratt/pc_ships/blob/main/images/icon.png" alt="Port Canaveral Ships Icon" style="max-width: 100px; display: block; margin: 0 auto;">
+<div align="center">
+  <img src="https://github.com/mattbratt/pc_ships/blob/main/images/icon.png" alt="Port Canaveral Ships Icon" width="100">
+</div>
 
-<h1>Port Canaveral Ships</h1>
+# Port Canaveral Ships
 
-<h2>About</h2>
-<p><strong>Port Canaveral Ships</strong> is a <a href="https://hacs.xyz/" target="_blank">HACS</a> solution that retrieves data from Port Canaveral and integrates it into <a href="https://www.home-assistant.io/" target="_blank">Home Assistant</a>. It provides a convenient way to monitor cargo and passenger ships moving in and out of Port Canaveral, located on the central east coast of Florida. Users can customize the integration to track cargo ships, passenger ships, or both, based on their preferences.</p>
-<p>During installation, users are presented with the following options:</p>
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/mattbratt/pc_ships?style=flat-square)
+![HACS Compatible](https://img.shields.io/badge/HACS-Compatible-brightgreen?style=flat-square)
+![Home Assistant](https://img.shields.io/badge/Home%20Assistant-Integration-blue?style=flat-square)
 
-<img src="https://github.com/mattbratt/pc_ships/blob/main/images/pc_ships_config.png">
+---
 
-<p>It’s recommended to keep most options at their defaults, though a popular customization is to select all statuses (instead of just "In Port" and "Confirmed"). The statuses are defined as follows:</p>
-<ul>
-    <li><strong>In Port</strong> - Ships currently in port and at a berth.</li>
-    <li><strong>Confirmed</strong> - Ships that have validated their arrival at the port.</li>
-    <li><strong>Scheduled</strong> - Ships scheduled to arrive at the port, used for managing berthing, etc.</li>
-    <li><strong>Departed</strong> - Ships that have recently departed.</li>
-</ul>
+## About
 
-<h2>Installing the Solution</h2>
+**Port Canaveral Ships** is a custom integration for [Home Assistant](https://www.home-assistant.io/) available via [HACS](https://hacs.xyz/). It fetches real-time data from Port Canaveral, located on Florida's central east coast, and brings ship tracking into your smart home setup. Monitor cargo ships, passenger ships, or both—tailored to your preferences.
 
-<h3>HACS (Preferred and Easy)</h3>
-<p>Install via the <strong>HACS</strong> community store for the simplest experience:</p>
-<ol>
-    <li>From Home Assistant, navigate to <strong>HACS</strong>.</li>
-    <li>In the HACS store, search for <em>"Port Canaveral Ships"</em>. Look for it in the "Available for download" or "New" section.</li>
-    <li>Click <strong>Download</strong>.</li>
-    <li>In Home Assistant, go to <strong>Settings > Devices & Services</strong>.</li>
-    <li>Click the blue <strong>+ Add Integration</strong> button.</li>
-    <li>Search for "Ships" and select <strong>Port Canaveral Ships</strong>.</li>
-    <li>Configure the integration by selecting statuses to track, retrieval intervals, and the number of ships to monitor for each status (In Port, Departed, Confirmed, Scheduled).</li>
-</ol>
+### Configuration Options
+During setup, customize your tracking with these options:
 
+<div align="center">
+  <img src="https://github.com/mattbratt/pc_ships/blob/main/images/pc_ships_config.png" alt="Config Screenshot" width="400">
+</div>
 
+Stick with the defaults for simplicity, or tweak them—like selecting all statuses instead of just "In Port" and "Confirmed." Here's what the statuses mean:
 
+- **In Port**: Ships currently docked at a berth.
+- **Confirmed**: Ships with validated arrivals.
+- **Scheduled**: Ships slated to arrive, aiding berth management.
+- **Departed**: Ships that recently left the port.
 
+---
 
-<h3>Manual Installation</h3>
-<p>For advanced users preferring a manual setup:</p>
-<ol>
-    <li>Download all files from <code>/custom_components/pc_ships</code> and place them in your Home Assistant instance under <code>/custom_components/pc_ships</code>.</li>
-    <li>In Home Assistant, go to <strong>Settings > Devices & Services</strong>.</li>
-    <li>Click the blue <strong>+ Add Integration</strong> button.</li>
-    <li>Search for "Ships" and select <strong>Port Canaveral Ships</strong>.</li>
-    <li>Configure the integration by selecting statuses to track, retrieval intervals, and the number of ships to monitor for each status. Recommended defaults: In Port: 15, Confirmed: 15, Scheduled: 15, Departed: 15.</li>
-</ol>
+## Installation
 
-<h2>Entities Created</h2>
-<p>The number and naming of entities depend on the selected statuses (In Port, Confirmed, Scheduled, Departed) and the number of sensors specified for each status.</p>
-<p>For example, if you select "In Port" and "Confirmed" with 2 sensors per status, the following entities are created:</p>
-<ul>
-    <li><code>sensor.port_canaveral_ships_in_port_1</code></li>
-    <li><code>sensor.port_canaveral_ships_in_port_2</code></li>
-    <li><code>sensor.port_canaveral_ships_confirmed_1</code></li>
-    <li><code>sensor.port_canaveral_ships_confirmed_2</code></li>
-</ul>
+### Option 1: HACS (Recommended)
+The easiest way to get started:
 
-<h2>Attributes Created for Each Entity</h2>
-<p>Each entity includes the following attributes:</p>
-<ul>
-    <li><strong>Status Type</strong>: (Values: In Port, Confirmed, Departed, Scheduled)</li>
-    <li><strong>Sensor Slot</strong>: (1 to the number of sensors requested)</li>
-    <li><strong>Last Updated</strong>: (e.g., February 20, 2025 at 10:07:00 AM)</li>
-    <li><strong>Vessel</strong>: (Vessel Name)</li>
-    <li><strong>Status</strong>: (Matches Status Type)</li>
-    <li><strong>Cargo Type</strong>: (Cargo aboard the ship)</li>
-    <li><strong>Vessel Class</strong>: (Cargo or Passenger)</li>
-    <li><strong>Flag</strong>: (Country of registration)</li>
-    <li><strong>Berth</strong>: (Assigned berth at port)</li>
-    <li><strong>Arrival Date</strong>: (e.g., 02/21/2025)</li>
-    <li><strong>Arrival Time</strong>: (e.g., 03:00, 24-hour format)</li>
-    <li><strong>Departure Date</strong>: (e.g., 02/21/2025)</li>
-    <li><strong>Departure Time</strong>: (e.g., 03:00, 24-hour format)</li>
-    <li><strong>Is Tug Boat</strong>: (True if vessel name starts with "TG", False otherwise)</li>
-    <li><strong>Others</strong>: Last Changed and Last Updated</li>
-</ul>
+1. Open **HACS** in Home Assistant.
+2. Search for *"Port Canaveral Ships"* in the store (check "Available for download" or "New").
+3. Click **Download**.
+4. Navigate to **Settings > Devices & Services** in Home Assistant.
+5. Click the blue **+ Add Integration** button.
+6. Search for "Ships," then select **Port Canaveral Ships**.
+7. Configure your preferences: statuses, retrieval intervals, and ship counts per status.
 
-<h2>About the Update Interval</h2>
-<p>We recommend using the default update interval of <strong>20 minutes</strong>. The minimum is <strong>15 minutes</strong>, and the solution enforces this limit to prevent unnecessary data retrievals.</p>
-<p>See the <code>lovelace_card_example.yaml</code> file for a sample Lovelace card configuration. It uses a vertical stack with conditionals for a dynamic display.</p>
+### Option 2: Manual Installation
+For the hands-on folks:
+
+1. Download all files from `/custom_components/pc_ships` in this repo.
+2. Place them in your Home Assistant’s `/custom_components/pc_ships` directory.
+3. Go to **Settings > Devices & Services**.
+4. Click **+ Add Integration**, search "Ships," and select **Port Canaveral Ships**.
+5. Set up statuses, intervals, and ship counts (e.g., defaults: In Port: 15, Confirmed: 15, Scheduled: 15, Departed: 15).
+
+---
+
+## Entities Created
+
+Entities vary based on your chosen statuses and sensor counts. For example, selecting "In Port" and "Confirmed" with 2 sensors each creates:
+
+- `sensor.port_canaveral_ships_in_port_1`
+- `sensor.port_canaveral_ships_in_port_2`
+- `sensor.port_canaveral_ships_confirmed_1`
+- `sensor.port_canaveral_ships_confirmed_2`
+
+---
+
+## Entity Attributes
+
+Each sensor comes packed with details:
+
+| Attribute          | Description                          | Example Value            |
+|--------------------|--------------------------------------|--------------------------|
+| **Status Type**    | Ship’s status category              | In Port, Confirmed, etc. |
+| **Sensor Slot**    | Sensor number                       | 1, 2, etc.              |
+| **Last Updated**   | Timestamp of last update            | Feb 20, 2025, 10:07 AM  |
+| **Vessel**         | Ship name                           | Icon of the Seas        |
+| **Status**         | Matches Status Type                 | In Port                 |
+| **Cargo Type**     | Cargo onboard                       | Containers              |
+| **Vessel Class**   | Ship type                           | Cargo or Passenger      |
+| **Flag**           | Country of registration             | Bahamas                 |
+| **Berth**          | Assigned berth                      | CT-10                   |
+| **Arrival Date**   | Date of arrival                     | 02/21/2025              |
+| **Arrival Time**   | Time of arrival (24-hour)           | 03:00                   |
+| **Departure Date** | Date of departure                   | 02/21/2025              |
+| **Departure Time** | Time of departure (24-hour)         | 03:00                   |
+| **Is Tug Boat**    | Tug boat indicator (TG prefix)      | True / False            |
+| **Others**         | Additional metadata                 | Last Changed, etc.      |
+
+---
+
+## Update Interval
+
+The default update interval is **20 minutes**, with a minimum of **15 minutes** enforced to avoid overloading the system. Adjust as needed during setup.
+
+For a slick UI, check out `lovelace_card_example.yaml` for a sample Lovelace card using vertical stacks and conditionals.
+
+---
+
+<div align="center">
+  <strong>Happy ship tracking!</strong><br>
+  Built with 🚢 by MattBratt
+</div>
