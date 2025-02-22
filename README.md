@@ -1,7 +1,7 @@
 <!-- Icon at the top -->
 <img src="https://github.com/mattbratt/pc_ships/blob/main/images/icon.png" alt="Port Canaveral Ships Icon" style="max-width: 100px; display: block; margin: 0 auto;">
 
-<h1>Port Canaveral Ships</h1>
+#Port Canaveral Ships
 
 <h2>About</h2>
 <p><strong>Port Canaveral Ships</strong> is a <a href="https://hacs.xyz/" target="_blank">HACS</a> solution that retrieves data from Port Canaveral and integrates it into <a href="https://www.home-assistant.io/" target="_blank">Home Assistant</a>. It provides a convenient way to monitor cargo and passenger ships moving in and out of Port Canaveral, located on the central east coast of Florida. Users can customize the integration to track cargo ships, passenger ships, or both, based on their preferences.</p>
