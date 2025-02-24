@@ -15,6 +15,8 @@
 
 Using this solution will bring ship port status into your smart home setup. You can monitor cargo ships, passenger ships, or both—tailored to your preferences.
 
+<img src="https://github.com/mattbratt/pc_ships/blob/main/images/port_canaveral_map.png" alt="Port Canaveral Ships Icon" width="400">
+
 ### Configuration Options
 During setup, customize your tracking with these options:
 
@@ -94,10 +96,10 @@ Each sensor comes packed with details:
 
 The default update interval is **20 minutes**, with a minimum of **15 minutes** enforced to avoid overloading the system. Adjust as needed during setup.
 
-For a slick UI, check out `lovelace_card_example.yaml` for a sample Lovelace card using vertical stacks and conditionals.
+To use in your UI, check out `lovelace_card_example.yaml` for a sample Lovelace card using vertical stacks and conditionals.
 
 ---
 
 <div align="center">
-  <strong>Happy sailing!</strong>
+  <strong>---</strong>
 </div>
