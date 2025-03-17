@@ -8,12 +8,9 @@
   "iot_class": "cloud_polling",
   "issue_tracker": "https://github.com/mattbratt/pc_ships/issues",
   "requirements": [
-    "requests>=2.25.1",
-    "beautifulsoup4>=4.9.3"
+    "requests",
+    "beautifulsoup4"
   ],
-  "version": "0.1.1"
+  "version": "0.1.2"
 }
-
-
-
 
