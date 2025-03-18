@@ -1,4 +1,4 @@
-DOMAIN = "port_canaveral_ships"
+DOMAIN = "pc_ships"
 
 CONF_TRACK_STATUSES = "track_statuses"
 CONF_UPDATE_INTERVAL_MINUTES = "update_interval_minutes"
