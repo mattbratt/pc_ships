@@ -11,9 +11,9 @@
 
 ## About
 
-**Port Canaveral Ships** is a custom integration for [Home Assistant](https://www.home-assistant.io/), available via [HACS](https://hacs.xyz/). It fetches real-time data from Port Canaveral, Florida—one of the busiest cruise ship ports in the world.
+**Port Canaveral Ships** fetches real-time data from Port Canaveral, Florida—one of the busiest cruise ship ports in the world. Using this solution will bring ship port status into your smart home setup. Using  You can monitor cargo ships, passenger ships, or both—tailored to your preferences.
 
-Using this solution will bring ship port status into your smart home setup. You can monitor cargo ships, passenger ships, or both—tailored to your preferences.
+In order to use it, you need [Home Assistant](https://www.home-assistant.io/). An open-source Home Automation solution. Furthermore, it is most easily installable through the HACS integration for Home Assistant [HACS](https://hacs.xyz/). 
 
 <img src="https://github.com/mattbratt/pc_ships/blob/main/images/port_canaveral_map.png" alt="Port Canaveral Ships Icon" width="400">
 
