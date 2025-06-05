@@ -16,8 +16,6 @@ from .const import (
     CONF_SENSOR_COUNT_DEPARTED,
     DEFAULT_SENSOR_COUNT,
 )
-from . import coordinator as coord_module  # or import the function(s) you need
-# e.g. from .coordinator import parse_date_time_to_epoch
 
 _LOGGER = logging.getLogger(__name__)
 
