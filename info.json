@@ -1,6 +1,6 @@
 {
     "name": "pc_ships",
     "domains": ["Port Canaveral Ships"],
-    "homeassistant": "2025.2.0",  # Minimum Home Assistant version (adjust as needed)
+    "homeassistant": "2025.2.0",
     "render_readme": true
-  }
+}
