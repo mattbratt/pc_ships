@@ -1,4 +1,7 @@
 {
     "name": "Port Canaveral Ships",
-    "country": "US"
+    "country": "US",
+    "domains": ["sensor"],
+    "homeassistant": "2025.2.0",
+    "persistent_directory": "pc_ships"
 }
