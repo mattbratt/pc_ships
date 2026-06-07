@@ -1,6 +1,7 @@
 """Initialize the Port Canaveral Ships integration."""
 import logging
 from datetime import timedelta
+from pathlib import Path
 
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.core import HomeAssistant
@@ -18,12 +19,21 @@ from .coordinator import PortCanaveralShipsCoordinator
 
 _LOGGER = logging.getLogger(__name__)
 
+_WWW_REGISTERED = False
+
 
 async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     """
     Set up Port Canaveral Ships from a config entry (UI-based).
     This is called when the user adds or updates the integration in the UI.
     """
+    global _WWW_REGISTERED
+    if not _WWW_REGISTERED:
+        www_path = Path(__file__).parent / "www"
+        hass.http.register_static_path("/pc_ships", str(www_path), cache_headers=False)
+        _WWW_REGISTERED = True
+        _LOGGER.debug("Registered static path /pc_ships -> %s", www_path)
+
     # For user-editable settings, read from entry.options, fallback to defaults
     track_statuses = entry.options.get(CONF_TRACK_STATUSES, DEFAULT_STATUSES)
     update_interval_minutes = entry.options.get(CONF_UPDATE_INTERVAL_MINUTES, DEFAULT_UPDATE_INTERVAL)
