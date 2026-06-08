@@ -63,15 +63,24 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
 async def _async_create_dashboard(hass: HomeAssistant) -> None:
     """Create the PC Ships Lovelace dashboard if it doesn't already exist."""
     from homeassistant.components.lovelace import DOMAIN as LOVELACE_DOMAIN
+    from homeassistant.components.frontend import async_register_built_in_panel
 
     lovelace = hass.data.get(LOVELACE_DOMAIN)
+    if lovelace is None:
+        _LOGGER.warning("Lovelace not available; skipping PC Ships dashboard creation")
+        return
+
     dashboards = getattr(lovelace, "dashboards", None)
     if dashboards is None:
         _LOGGER.warning("Lovelace dashboards not available; skipping PC Ships dashboard creation")
         return
 
-    # Skip silently if the dashboard already exists (e.g. after a reload)
-    if any(item.get("url_path") == _DASHBOARD_URL_PATH for item in dashboards.async_items()):
+    # Check existence — dashboards is a dict in HA 2025.x, a collection in older HA
+    if isinstance(dashboards, dict):
+        if _DASHBOARD_URL_PATH in dashboards:
+            _LOGGER.debug("PC Ships dashboard already exists at /%s", _DASHBOARD_URL_PATH)
+            return
+    elif any(item.get("url_path") == _DASHBOARD_URL_PATH for item in dashboards.async_items()):
         _LOGGER.debug("PC Ships dashboard already exists at /%s", _DASHBOARD_URL_PATH)
         return
 
@@ -83,20 +92,68 @@ async def _async_create_dashboard(hass: HomeAssistant) -> None:
 
     config = await hass.async_add_executor_job(_load_yaml)
 
-    try:
-        await dashboards.async_create_item({
-            "url_path": _DASHBOARD_URL_PATH,
-            "icon": "mdi:ferry",
-            "title": "PC Ships",
-            "show_in_sidebar": True,
-            "require_admin": False,
-        })
-    except Exception as err:
-        _LOGGER.error("Failed to register PC Ships dashboard: %s", err)
-        return
+    if not isinstance(dashboards, dict):
+        # Older HA: use the collection API
+        try:
+            await dashboards.async_create_item({
+                "url_path": _DASHBOARD_URL_PATH,
+                "icon": "mdi:ferry",
+                "title": "PC Ships",
+                "show_in_sidebar": True,
+                "require_admin": False,
+            })
+        except Exception as err:
+            _LOGGER.error("Failed to register PC Ships dashboard: %s", err)
+            return
+        store = Store(hass, 1, f"lovelace.{_DASHBOARD_URL_PATH}")
+        await store.async_save({"config": config})
+    else:
+        # HA 2025.x: dashboards is a plain dict — create manually
+        try:
+            from homeassistant.components.lovelace.dashboard import LovelaceStorage
 
-    store = Store(hass, 1, f"lovelace.{_DASHBOARD_URL_PATH}")
-    await store.async_save({"config": config})
+            dashboard_meta = {
+                "id": "pc_ships_default",
+                "url_path": _DASHBOARD_URL_PATH,
+                "title": "PC Ships",
+                "icon": "mdi:ferry",
+                "show_in_sidebar": True,
+                "require_admin": False,
+                "mode": "storage",
+            }
+
+            # Save dashboard config to HA storage
+            store = Store(hass, 1, f"lovelace.{_DASHBOARD_URL_PATH}")
+            await store.async_save({"config": config})
+
+            # Add LovelaceStorage instance to the in-memory dashboards dict
+            dashboards[_DASHBOARD_URL_PATH] = LovelaceStorage(hass, dashboard_meta)
+
+            # Register the sidebar panel so it appears immediately
+            async_register_built_in_panel(
+                hass,
+                "lovelace",
+                "PC Ships",
+                "mdi:ferry",
+                _DASHBOARD_URL_PATH,
+                {"mode": "storage"},
+                require_admin=False,
+                update=True,
+            )
+
+            # Persist dashboard metadata so it survives HA restart
+            dashboards_store = Store(hass, 1, "lovelace_dashboards")
+            registry = await dashboards_store.async_load() or {}
+            items = registry.get("items", [])
+            if not any(item.get("url_path") == _DASHBOARD_URL_PATH for item in items):
+                items.append(dashboard_meta)
+                registry["items"] = items
+                await dashboards_store.async_save(registry)
+
+        except Exception as err:
+            _LOGGER.error("Failed to create PC Ships dashboard: %s", err)
+            return
+
     _LOGGER.info("PC Ships dashboard created at /%s", _DASHBOARD_URL_PATH)
 
 
