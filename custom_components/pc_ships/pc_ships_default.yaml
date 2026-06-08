@@ -1,0 +1,777 @@
+title: PC Ships
+button_card_templates:
+  pc_ship_card:
+    show_name: false
+    show_state: false
+    show_icon: false
+    variables:
+      pc_ent: |
+        [[[
+          return states[entity.entity_id];
+        ]]]
+      pc_vessel: |
+        [[[
+          const e = states[entity.entity_id];
+          return e?.attributes?.vessel || e?.state || "Unknown";
+        ]]]
+      pc_cargo: |
+        [[[
+          const e = states[entity.entity_id];
+          return e?.attributes?.cargo_type || "";
+        ]]]
+      pc_flagCode: |
+        [[[
+          const e = states[entity.entity_id];
+          return e?.attributes?.flag_code || "";
+        ]]]
+      pc_shipPath: |
+        [[[
+          const e = states[entity.entity_id];
+          const v = e?.attributes?.vessel || "Unknown";
+          const clean = String(v).replace(/[^a-zA-Z0-9]/g, '').toUpperCase();
+          return `/pc_ships/images/ships/${clean}.png`;
+        ]]]
+      pc_cargoPath: |
+        [[[
+          const e = states[entity.entity_id];
+          const c = e?.attributes?.cargo_type || "";
+          const clean = String(c).toLowerCase().replace(/[^a-z0-9]/g, '');
+          return `/pc_ships/images/ships/${clean}.png`;
+        ]]]
+      pc_defaultPath: |
+        [[[
+          return `/pc_ships/images/ships/default.png`;
+        ]]]
+      pc_img_style: |
+        [[[
+          return "width: clamp(100px, 30vw, 480px); max-height: 400px; object-fit: contain; align-self: start; margin-top: 8px; filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.8));";
+        ]]]
+    styles:
+      card:
+        - font-size: clamp(12px, 2vw, 16px)
+        - line-height: 1.4
+        - padding: clamp(8px, 2vw, 16px)
+      grid:
+        - grid-template-areas: >-
+            "name name" "status ship_icon" "cargo_type ship_icon" "flag
+            ship_icon" "berth ship_icon" "arrival ship_icon" "departure
+            ship_icon"
+        - grid-template-columns: 1fr auto
+        - column-gap: clamp(5px, 1vw, 10px)
+        - row-gap: clamp(5px, 1vw, 10px)
+    custom_fields:
+      ship_icon: |
+        [[[
+          const vessel = variables.pc_vessel;
+          const shipPath = variables.pc_shipPath;
+          const cargoPath = variables.pc_cargoPath;
+          const defaultPath = variables.pc_defaultPath;
+          const style = variables.pc_img_style;
+          const onErr = `this.onerror=function(){ this.onerror=null; this.src='${defaultPath}'; }; this.src='${cargoPath}';`;
+          return `
+            <div class="ship-icon-container" style="text-align:center;">
+              <img class="ship-image"
+                   src="${shipPath}"
+                   alt="${vessel}"
+                   style="${style}"
+                   onerror="${onErr}"/>
+            </div>
+          `;
+        ]]]
+      name: |
+        [[[
+          const e = variables.pc_ent;
+          const vesselName = e?.attributes?.vessel || e?.state || "Unknown";
+          return `
+            <div style="
+              font-weight: bold;
+              font-size: clamp(16px, 3vw, 24px);
+              margin-bottom: clamp(4px, 1vw, 8px);
+              word-wrap: break-word;
+              overflow-wrap: anywhere;
+            ">${vesselName}</div>
+          `;
+        ]]]
+      status: |
+        [[[
+          const e = variables.pc_ent;
+          const v = e?.attributes?.status ?? "N/A";
+          return `<div style="text-align: left;">Status: ${v}</div>`;
+        ]]]
+      cargo_type: |
+        [[[
+          const e = variables.pc_ent;
+          const v = e?.attributes?.cargo_type ?? "N/A";
+          return `<div style="text-align: left;">Cargo: ${v}</div>`;
+        ]]]
+      flag: |
+        [[[
+          const e = variables.pc_ent;
+          const flagName = e?.attributes?.flag ?? "N/A";
+          const flagCode = e?.attributes?.flag_code ?? "";
+          const flagImg = flagCode
+            ? `<img src="/pc_ships/images/flags/${flagCode}.png" style="height:16px; width:auto; vertical-align:middle; margin-right:4px;" onerror="this.style.display='none'"/>`
+            : "";
+          return `<div style="text-align: left;">Flag: ${flagImg}${flagName}</div>`;
+        ]]]
+      berth: |
+        [[[
+          const e = variables.pc_ent;
+          const v = e?.attributes?.berth ?? "N/A";
+          return `<div style="text-align: left;">Berth: ${v}</div>`;
+        ]]]
+      arrival: |
+        [[[
+          const e = variables.pc_ent;
+          const d = e?.attributes?.arrival_date ?? "N/A";
+          const t = e?.attributes?.arrival_time ?? "";
+          return `<div style="text-align: left;">Arrival: ${d} ${t}</div>`;
+        ]]]
+      departure: |
+        [[[
+          const e = variables.pc_ent;
+          const d = e?.attributes?.departure_date ?? "N/A";
+          const t = e?.attributes?.departure_time ?? "";
+          return `<div style="text-align: left;">Departure: ${d} ${t}</div>`;
+        ]]]
+    card_mod:
+      style:
+        .: |
+          ha-card {
+            border-radius: 10px;
+            border: 1px solid #ddd;
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 1) 0%, rgba(0, 191, 255, 0.8) 100%);
+          }
+        button-card$: |
+          @media (max-width: 600px) {
+            .ship-image {
+              max-width: 100%;
+              max-height: 150px;
+            }
+            .ship-icon-container {
+              margin-top: 10px;
+            }
+            #card .grid {
+              grid-template-areas:
+                "name"
+                "status"
+                "cargo_type"
+                "flag"
+                "berth"
+                "arrival"
+                "departure"
+                "ship_icon" !important;
+              grid-template-columns: 1fr !important;
+            }
+          }
+          @media (max-width: 500px) {
+            .ship-image {
+              display: none !important;
+            }
+          }
+views:
+  - title: Home
+    sections:
+      - type: grid
+        cards:
+          - type: heading
+            heading: Ships In Port - Departing Next - NONE at this time
+            heading_style: title
+            icon: mdi:export
+        column_span: 4
+        visibility:
+          - condition: state
+            entity: sensor.port_canaveral_ships_in_port_1
+            state: No Data
+      - type: grid
+        cards:
+          - type: heading
+            heading: Ships In Port - Departing Next
+            heading_style: title
+            icon: mdi:export
+            grid_options:
+              rows: 1
+              columns: full
+          - type: custom:button-card
+            template: pc_ship_card
+            entity: sensor.port_canaveral_ships_in_port_1
+            grid_options:
+              columns: full
+            variables:
+              pc_img_style: |
+                [[[
+                  return "width: clamp(100px, 40vw, 900px); max-height: 900px; object-fit: contain; align-self: start; margin-top: 8px; filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.8));";
+                ]]]
+            styles:
+              card:
+                - font-size: clamp(12px, 1.8vw, 18px)
+                - line-height: 1.5
+                - padding: 16px
+              grid:
+                - grid-template-areas: >-
+                    "name name" "status ship_icon" "cargo_type ship_icon" "flag
+                    ship_icon" "berth ship_icon" "arrival ship_icon" "departure
+                    ship_icon"
+                - grid-template-columns: 1fr auto
+                - column-gap: 1em
+                - row-gap: 0.8em
+        column_span: 4
+        visibility:
+          - condition: state
+            entity: sensor.port_canaveral_ships_in_port_1
+            state_not: No Data
+      - type: grid
+        cards:
+          - type: heading
+            heading: Ships In Port - Departing Later
+            heading_style: title
+            grid_options:
+              rows: 1
+              columns: full
+            icon: mdi:export
+        column_span: 4
+        visibility:
+          - condition: state
+            entity: sensor.port_canaveral_ships_in_port_2
+            state_not: No Data
+      - type: grid
+        cards:
+          - type: conditional
+            grid_options:
+              columns: full
+            conditions:
+              - condition: state
+                entity: sensor.port_canaveral_ships_in_port_2
+                state_not: No Data
+            card:
+              type: custom:button-card
+              template: pc_ship_card
+              entity: sensor.port_canaveral_ships_in_port_2
+        column_span: 2
+        visibility:
+          - condition: state
+            entity: sensor.port_canaveral_ships_in_port_2
+            state_not: No Data
+      - type: grid
+        cards:
+          - type: conditional
+            grid_options:
+              columns: full
+            conditions:
+              - condition: state
+                entity: sensor.port_canaveral_ships_in_port_3
+                state_not: No Data
+            card:
+              type: custom:button-card
+              template: pc_ship_card
+              entity: sensor.port_canaveral_ships_in_port_3
+        column_span: 2
+        visibility:
+          - condition: state
+            entity: sensor.port_canaveral_ships_in_port_2
+            state_not: No Data
+      - type: grid
+        cards:
+          - type: conditional
+            grid_options:
+              columns: full
+            conditions:
+              - condition: state
+                entity: sensor.port_canaveral_ships_in_port_4
+                state_not: No Data
+            card:
+              type: custom:button-card
+              template: pc_ship_card
+              entity: sensor.port_canaveral_ships_in_port_4
+        column_span: 2
+        visibility:
+          - condition: state
+            entity: sensor.port_canaveral_ships_in_port_2
+            state_not: No Data
+      - type: grid
+        cards:
+          - type: conditional
+            grid_options:
+              columns: full
+            conditions:
+              - condition: state
+                entity: sensor.port_canaveral_ships_in_port_5
+                state_not: No Data
+            card:
+              type: custom:button-card
+              template: pc_ship_card
+              entity: sensor.port_canaveral_ships_in_port_5
+        column_span: 2
+        visibility:
+          - condition: state
+            entity: sensor.port_canaveral_ships_in_port_2
+            state_not: No Data
+      - type: grid
+        cards:
+          - type: conditional
+            grid_options:
+              columns: full
+            conditions:
+              - condition: state
+                entity: sensor.port_canaveral_ships_in_port_6
+                state_not: No Data
+            card:
+              type: custom:button-card
+              template: pc_ship_card
+              entity: sensor.port_canaveral_ships_in_port_6
+        column_span: 2
+        visibility:
+          - condition: state
+            entity: sensor.port_canaveral_ships_in_port_2
+            state_not: No Data
+      - type: grid
+        cards:
+          - type: conditional
+            grid_options:
+              columns: full
+            conditions:
+              - condition: state
+                entity: sensor.port_canaveral_ships_in_port_7
+                state_not: No Data
+            card:
+              type: custom:button-card
+              template: pc_ship_card
+              entity: sensor.port_canaveral_ships_in_port_7
+        column_span: 2
+        visibility:
+          - condition: state
+            entity: sensor.port_canaveral_ships_in_port_2
+            state_not: No Data
+      - type: grid
+        cards:
+          - type: conditional
+            grid_options:
+              columns: full
+            conditions:
+              - condition: state
+                entity: sensor.port_canaveral_ships_in_port_8
+                state_not: No Data
+            card:
+              type: custom:button-card
+              template: pc_ship_card
+              entity: sensor.port_canaveral_ships_in_port_8
+        column_span: 2
+        visibility:
+          - condition: state
+            entity: sensor.port_canaveral_ships_in_port_2
+            state_not: No Data
+      - type: grid
+        cards:
+          - type: conditional
+            grid_options:
+              columns: full
+            conditions:
+              - condition: state
+                entity: sensor.port_canaveral_ships_in_port_9
+                state_not: No Data
+            card:
+              type: custom:button-card
+              template: pc_ship_card
+              entity: sensor.port_canaveral_ships_in_port_9
+        column_span: 2
+        visibility:
+          - condition: state
+            entity: sensor.port_canaveral_ships_in_port_2
+            state_not: No Data
+      - type: grid
+        cards:
+          - type: conditional
+            grid_options:
+              columns: full
+            conditions:
+              - condition: state
+                entity: sensor.port_canaveral_ships_in_port_10
+                state_not: No Data
+            card:
+              type: custom:button-card
+              template: pc_ship_card
+              entity: sensor.port_canaveral_ships_in_port_10
+        column_span: 2
+        visibility:
+          - condition: state
+            entity: sensor.port_canaveral_ships_in_port_2
+            state_not: No Data
+      - type: grid
+        cards:
+          - type: conditional
+            grid_options:
+              columns: full
+            conditions:
+              - condition: state
+                entity: sensor.port_canaveral_ships_in_port_11
+                state_not: No Data
+            card:
+              type: custom:button-card
+              template: pc_ship_card
+              entity: sensor.port_canaveral_ships_in_port_11
+        column_span: 2
+        visibility:
+          - condition: state
+            entity: sensor.port_canaveral_ships_in_port_2
+            state_not: No Data
+      - type: grid
+        cards:
+          - type: heading
+            heading: Ships Confirmed - Arriving Later
+            heading_style: title
+            grid_options:
+              rows: 1
+              columns: full
+            icon: mdi:import
+        column_span: 4
+        visibility:
+          - condition: state
+            entity: sensor.port_canaveral_ships_confirmed_1
+            state_not: No Data
+      - type: grid
+        cards:
+          - type: conditional
+            grid_options:
+              columns: full
+            conditions:
+              - condition: state
+                entity: sensor.port_canaveral_ships_confirmed_1
+                state_not: No Data
+            card:
+              type: custom:button-card
+              template: pc_ship_card
+              entity: sensor.port_canaveral_ships_confirmed_1
+              styles:
+                card:
+                  - font-size: clamp(12px, 1.8vw, 18px)
+                  - line-height: 1.5
+                  - padding: 16px
+                  - column_span: 4
+                grid:
+                  - grid-template-areas: >-
+                      "name name" "status ship_icon" "cargo_type ship_icon"
+                      "flag ship_icon" "berth ship_icon" "arrival ship_icon"
+                      "departure ship_icon"
+                  - grid-template-columns: 1fr auto
+                  - column-gap: 1em
+                  - row-gap: 0.8em
+        column_span: 2
+      - type: grid
+        cards:
+          - type: conditional
+            grid_options:
+              columns: full
+            conditions:
+              - condition: state
+                entity: sensor.port_canaveral_ships_confirmed_2
+                state_not: No Data
+            card:
+              type: custom:button-card
+              template: pc_ship_card
+              entity: sensor.port_canaveral_ships_confirmed_2
+              styles:
+                card:
+                  - font-size: clamp(12px, 1.8vw, 18px)
+                  - line-height: 1.5
+                  - padding: 16px
+                  - column_span: 4
+                grid:
+                  - grid-template-areas: >-
+                      "name name" "status ship_icon" "cargo_type ship_icon"
+                      "flag ship_icon" "berth ship_icon" "arrival ship_icon"
+                      "departure ship_icon"
+                  - grid-template-columns: 1fr auto
+                  - column-gap: 1em
+                  - row-gap: 0.8em
+        column_span: 2
+      - type: grid
+        cards:
+          - type: conditional
+            grid_options:
+              columns: full
+            conditions:
+              - condition: state
+                entity: sensor.port_canaveral_ships_confirmed_3
+                state_not: No Data
+            card:
+              type: custom:button-card
+              template: pc_ship_card
+              entity: sensor.port_canaveral_ships_confirmed_3
+              styles:
+                card:
+                  - font-size: clamp(12px, 1.8vw, 18px)
+                  - line-height: 1.5
+                  - padding: 16px
+                  - column_span: 4
+                grid:
+                  - grid-template-areas: >-
+                      "name name" "status ship_icon" "cargo_type ship_icon"
+                      "flag ship_icon" "berth ship_icon" "arrival ship_icon"
+                      "departure ship_icon"
+                  - grid-template-columns: 1fr auto
+                  - column-gap: 1em
+                  - row-gap: 0.8em
+        column_span: 2
+      - type: grid
+        cards:
+          - type: conditional
+            grid_options:
+              columns: full
+            conditions:
+              - condition: state
+                entity: sensor.port_canaveral_ships_confirmed_4
+                state_not: No Data
+            card:
+              type: custom:button-card
+              template: pc_ship_card
+              entity: sensor.port_canaveral_ships_confirmed_4
+              styles:
+                card:
+                  - font-size: clamp(12px, 1.8vw, 18px)
+                  - line-height: 1.5
+                  - padding: 16px
+                  - column_span: 4
+                grid:
+                  - grid-template-areas: >-
+                      "name name" "status ship_icon" "cargo_type ship_icon"
+                      "flag ship_icon" "berth ship_icon" "arrival ship_icon"
+                      "departure ship_icon"
+                  - grid-template-columns: 1fr auto
+                  - column-gap: 1em
+                  - row-gap: 0.8em
+        column_span: 2
+      - type: grid
+        cards:
+          - type: conditional
+            grid_options:
+              columns: full
+            conditions:
+              - condition: state
+                entity: sensor.port_canaveral_ships_confirmed_5
+                state_not: No Data
+            card:
+              type: custom:button-card
+              template: pc_ship_card
+              entity: sensor.port_canaveral_ships_confirmed_5
+              styles:
+                card:
+                  - font-size: clamp(12px, 1.8vw, 18px)
+                  - line-height: 1.5
+                  - padding: 16px
+                  - column_span: 4
+                grid:
+                  - grid-template-areas: >-
+                      "name name" "status ship_icon" "cargo_type ship_icon"
+                      "flag ship_icon" "berth ship_icon" "arrival ship_icon"
+                      "departure ship_icon"
+                  - grid-template-columns: 1fr auto
+                  - column-gap: 1em
+                  - row-gap: 0.8em
+        column_span: 2
+      - type: grid
+        cards:
+          - type: conditional
+            grid_options:
+              columns: full
+            conditions:
+              - condition: state
+                entity: sensor.port_canaveral_ships_confirmed_6
+                state_not: No Data
+            card:
+              type: custom:button-card
+              template: pc_ship_card
+              entity: sensor.port_canaveral_ships_confirmed_6
+              styles:
+                card:
+                  - font-size: clamp(12px, 1.8vw, 18px)
+                  - line-height: 1.5
+                  - padding: 16px
+                  - column_span: 4
+                grid:
+                  - grid-template-areas: >-
+                      "name name" "status ship_icon" "cargo_type ship_icon"
+                      "flag ship_icon" "berth ship_icon" "arrival ship_icon"
+                      "departure ship_icon"
+                  - grid-template-columns: 1fr auto
+                  - column-gap: 1em
+                  - row-gap: 0.8em
+        column_span: 2
+      - type: grid
+        cards:
+          - type: conditional
+            grid_options:
+              columns: full
+            conditions:
+              - condition: state
+                entity: sensor.port_canaveral_ships_confirmed_7
+                state_not: No Data
+            card:
+              type: custom:button-card
+              template: pc_ship_card
+              entity: sensor.port_canaveral_ships_confirmed_7
+              styles:
+                card:
+                  - font-size: clamp(12px, 1.8vw, 18px)
+                  - line-height: 1.5
+                  - padding: 16px
+                  - column_span: 4
+                grid:
+                  - grid-template-areas: >-
+                      "name name" "status ship_icon" "cargo_type ship_icon"
+                      "flag ship_icon" "berth ship_icon" "arrival ship_icon"
+                      "departure ship_icon"
+                  - grid-template-columns: 1fr auto
+                  - column-gap: 1em
+                  - row-gap: 0.8em
+        column_span: 2
+      - type: grid
+        cards:
+          - type: conditional
+            grid_options:
+              columns: full
+            conditions:
+              - condition: state
+                entity: sensor.port_canaveral_ships_confirmed_8
+                state_not: No Data
+            card:
+              type: custom:button-card
+              template: pc_ship_card
+              entity: sensor.port_canaveral_ships_confirmed_8
+              styles:
+                card:
+                  - font-size: clamp(12px, 1.8vw, 18px)
+                  - line-height: 1.5
+                  - padding: 16px
+                  - column_span: 4
+                grid:
+                  - grid-template-areas: >-
+                      "name name" "status ship_icon" "cargo_type ship_icon"
+                      "flag ship_icon" "berth ship_icon" "arrival ship_icon"
+                      "departure ship_icon"
+                  - grid-template-columns: 1fr auto
+                  - column-gap: 1em
+                  - row-gap: 0.8em
+        column_span: 2
+      - type: grid
+        cards:
+          - type: conditional
+            grid_options:
+              columns: full
+            conditions:
+              - condition: state
+                entity: sensor.port_canaveral_ships_confirmed_9
+                state_not: No Data
+            card:
+              type: custom:button-card
+              template: pc_ship_card
+              entity: sensor.port_canaveral_ships_confirmed_9
+              styles:
+                card:
+                  - font-size: clamp(12px, 1.8vw, 18px)
+                  - line-height: 1.5
+                  - padding: 16px
+                  - column_span: 4
+                grid:
+                  - grid-template-areas: >-
+                      "name name" "status ship_icon" "cargo_type ship_icon"
+                      "flag ship_icon" "berth ship_icon" "arrival ship_icon"
+                      "departure ship_icon"
+                  - grid-template-columns: 1fr auto
+                  - column-gap: 1em
+                  - row-gap: 0.8em
+        column_span: 2
+      - type: grid
+        cards:
+          - type: conditional
+            grid_options:
+              columns: full
+            conditions:
+              - condition: state
+                entity: sensor.port_canaveral_ships_confirmed_10
+                state_not: No Data
+            card:
+              type: custom:button-card
+              template: pc_ship_card
+              entity: sensor.port_canaveral_ships_confirmed_10
+              styles:
+                card:
+                  - font-size: clamp(12px, 1.8vw, 18px)
+                  - line-height: 1.5
+                  - padding: 16px
+                  - column_span: 4
+                grid:
+                  - grid-template-areas: >-
+                      "name name" "status ship_icon" "cargo_type ship_icon"
+                      "flag ship_icon" "berth ship_icon" "arrival ship_icon"
+                      "departure ship_icon"
+                  - grid-template-columns: 1fr auto
+                  - column-gap: 1em
+                  - row-gap: 0.8em
+        column_span: 2
+      - type: grid
+        cards:
+          - type: conditional
+            grid_options:
+              columns: full
+            conditions:
+              - condition: state
+                entity: sensor.port_canaveral_ships_confirmed_11
+                state_not: No Data
+            card:
+              type: custom:button-card
+              template: pc_ship_card
+              entity: sensor.port_canaveral_ships_confirmed_11
+              styles:
+                card:
+                  - font-size: clamp(12px, 1.8vw, 18px)
+                  - line-height: 1.5
+                  - padding: 16px
+                  - column_span: 4
+                grid:
+                  - grid-template-areas: >-
+                      "name name" "status ship_icon" "cargo_type ship_icon"
+                      "flag ship_icon" "berth ship_icon" "arrival ship_icon"
+                      "departure ship_icon"
+                  - grid-template-columns: 1fr auto
+                  - column-gap: 1em
+                  - row-gap: 0.8em
+        column_span: 2
+      - type: grid
+        cards:
+          - type: conditional
+            grid_options:
+              columns: full
+            conditions:
+              - condition: state
+                entity: sensor.port_canaveral_ships_confirmed_12
+                state_not: No Data
+            card:
+              type: custom:button-card
+              template: pc_ship_card
+              entity: sensor.port_canaveral_ships_confirmed_12
+              styles:
+                card:
+                  - font-size: clamp(12px, 1.8vw, 18px)
+                  - line-height: 1.5
+                  - padding: 16px
+                  - column_span: 4
+                grid:
+                  - grid-template-areas: >-
+                      "name name" "status ship_icon" "cargo_type ship_icon"
+                      "flag ship_icon" "berth ship_icon" "arrival ship_icon"
+                      "departure ship_icon"
+                  - grid-template-columns: 1fr auto
+                  - column-gap: 1em
+                  - row-gap: 0.8em
+        column_span: 2
+    header:
+      card:
+        type: markdown
+        content: >-
+          # Port Canaveral Ships
+
+          Hello {{ user }}, here are the ships that are currently at Port
+          Canaveral and those that are on the schedule as well.
+        title: Port Canaveral Ships
+        text_only: true
+    badges: []
