@@ -33,7 +33,7 @@ Stick with the defaults for simplicity, or customize them—such as selecting al
 
 ---
 
-## PC Ships Dashboard
+## PC Ships Dashboard (New in versions 0.2.x and later!)
 
 When you configure the integration, a **PC Ships** Lovelace dashboard is automatically written to Home Assistant storage and registered in your sidebar. It shows ships grouped by status — Departing Next (hero card), In Port, and Confirmed Arrivals — with ship photos, flag images, berth assignments, and schedule details.
 
