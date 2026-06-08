@@ -64,8 +64,8 @@ async def _async_create_dashboard(hass: HomeAssistant) -> None:
     """Create the PC Ships Lovelace dashboard if it doesn't already exist."""
     from homeassistant.components.lovelace import DOMAIN as LOVELACE_DOMAIN
 
-    lovelace = hass.data.get(LOVELACE_DOMAIN, {})
-    dashboards = lovelace.get("dashboards")
+    lovelace = hass.data.get(LOVELACE_DOMAIN)
+    dashboards = getattr(lovelace, "dashboards", None)
     if dashboards is None:
         _LOGGER.warning("Lovelace dashboards not available; skipping PC Ships dashboard creation")
         return
