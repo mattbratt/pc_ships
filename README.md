@@ -15,7 +15,8 @@
 
 It is tightly integrated with [Home Assistant](https://www.home-assistant.io/) and most easily installed through [HACS](https://hacs.xyz/).
 
-<img src="https://github.com/mattbratt/pc_ships/blob/main/images/port_canaveral_map.png" alt="Port Canaveral Ships Icon" width="400">
+<img src="https://github.com/mattbratt/pc_ships/blob/main/images/port_canaveral_map.png" alt="Port Canaveral Ships Icon" width="400"><img width="1599" height="810" alt="image" src="https://github.com/user-attachments/assets/8620090d-ef43-43be-8dbe-d365d1da6812" />
+
 
 ### Configuration Options
 During setup, customize your tracking with these options:
