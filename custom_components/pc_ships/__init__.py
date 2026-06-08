@@ -4,6 +4,7 @@ import yaml
 from datetime import timedelta
 from pathlib import Path
 
+from homeassistant.components.http import StaticPathConfig
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.core import HomeAssistant
 from homeassistant.helpers.storage import Store
@@ -30,7 +31,9 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     global _WWW_REGISTERED
     if not _WWW_REGISTERED:
         www_path = Path(__file__).parent / "www"
-        hass.http.register_static_path("/pc_ships", str(www_path), cache_headers=False)
+        await hass.http.async_register_static_paths(
+            [StaticPathConfig("/pc_ships", str(www_path), False)]
+        )
         _WWW_REGISTERED = True
         _LOGGER.debug("Registered static path /pc_ships -> %s", www_path)
 
