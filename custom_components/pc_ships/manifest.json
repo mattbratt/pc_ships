@@ -7,11 +7,11 @@
   "documentation": "https://github.com/mattbratt/pc_ships",
   "iot_class": "cloud_polling",
   "issue_tracker": "https://github.com/mattbratt/pc_ships/issues",
+  "quality_scale": "custom",
   "requirements": [
     "requests>=2.28.0",
     "beautifulsoup4>=4.11.0"
   ],
   "single_config_entry": true,
-  "version": "0.2.5",
-  "quality_scale": "custom"
+  "version": "0.2.5"
 }
