@@ -3,7 +3,7 @@
   "name": "Port Canaveral Ships",
   "codeowners": ["@mattbratt"],
   "config_flow": true,
-  "dependencies": ["lovelace"],
+  "dependencies": ["http", "lovelace"],
   "documentation": "https://github.com/mattbratt/pc_ships",
   "iot_class": "cloud_polling",
   "issue_tracker": "https://github.com/mattbratt/pc_ships/issues",
@@ -13,6 +13,5 @@
   ],
   "single_config_entry": true,
   "version": "0.2.5",
-  "homeassistant": "2025.2.0",
   "quality_scale": "custom"
 }
