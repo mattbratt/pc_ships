@@ -11,11 +11,18 @@
 
 ## About
 
-**Port Canaveral Ships** fetches real-time data from Port Canaveral, Florida — one of the busiest cruise ship ports in the world. Track cargo ships, passenger ships, or both, tailored to your preferences. Know who is leaving first, arriving next, and which berth they're using — right in your smart home. A full visual **PC Ships** dashboard is automatically installed, complete with ship images and flag icons.
+**Port Canaveral Ships** fetches real-time data from Port Canaveral, Florida — one of the busiest cruise ship ports in the world. 
+
+<img src="https://github.com/mattbratt/pc_ships/blob/main/images/port_canaveral_map.png" alt="Port Canaveral Ships Icon" width="400">
+
+
+
+Track cargo ships, passenger ships, or both, tailored to your preferences. Know who is leaving first, arriving next, and which berth they're using — right in your smart home. A full visual **PC Ships** dashboard is automatically installed, complete with ship images and flag icons.
 
 It is tightly integrated with [Home Assistant](https://www.home-assistant.io/) and most easily installed through [HACS](https://hacs.xyz/).
 
-<img src="https://github.com/mattbratt/pc_ships/blob/main/images/port_canaveral_map.png" alt="Port Canaveral Ships Icon" width="400">
+<img width="1599" height="810" alt="image" src="https://github.com/user-attachments/assets/8620090d-ef43-43be-8dbe-d365d1da6812" />
+
 
 ### Configuration Options
 During setup, customize your tracking with these options:
@@ -33,7 +40,9 @@ Stick with the defaults for simplicity, or customize them—such as selecting al
 
 ---
 
-## PC Ships Dashboard
+## PC Ships Dashboard (New in versions 0.2.x and later!)
+
+<img width="1599" height="810" alt="image" src="https://github.com/user-attachments/assets/d1a10109-47b9-479a-bfd7-16855d78b352" />
 
 When you configure the integration, a **PC Ships** Lovelace dashboard is automatically written to Home Assistant storage and registered in your sidebar. It shows ships grouped by status — Departing Next (hero card), In Port, and Confirmed Arrivals — with ship photos, flag images, berth assignments, and schedule details.
 
